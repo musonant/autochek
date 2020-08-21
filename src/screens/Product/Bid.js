@@ -4,6 +4,7 @@ import moment from 'moment';
 import { spaces, colors, fontSizes } from '../../styles/variables';
 import { toMoneyString } from '../../libs';
 import bidIcon from '../../assets/images/bid.png';
+import CustomIcon from '../../components/CustomIcon';
 
 const Bid = ({ id, date, price }) => {
   return (
@@ -17,7 +18,8 @@ const Bid = ({ id, date, price }) => {
           </Text>
         </View>
       </View>
-      <View>
+      <View style={styles.rightContent}>
+        <CustomIcon name="tag" style={styles.icon} />
         {price && <Text style={styles.price}>{toMoneyString(price)}</Text>}
       </View>
     </View>
@@ -45,8 +47,17 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   date: {
-    fontSize: fontSizes.md,
+    fontSize: fontSizes.sm,
     color: colors.grey,
+  },
+  rightContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    color: colors.grey,
+    marginRight: spaces.xs,
+    fontSize: fontSizes.md,
   },
   price: {
     color: colors.orangeRed,

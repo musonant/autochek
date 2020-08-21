@@ -14,12 +14,13 @@ import { productDetail } from './mockData';
 import { toMoneyString } from '../../libs';
 import Bid from './Bid';
 import productImage from '../../assets/images/specimen.png';
+import CustomIcon from '../../components/CustomIcon';
 
 /**
  * @todo:
- * - Add icons
  * - Format money and thousand separator
  * - Format price to 'N52M'
+ * - Add star rating
  */
 const Product = () => {
   const {
@@ -54,25 +55,29 @@ const Product = () => {
           </View>
           <View style={styles.quickInfo}>
             <View style={styles.infoItem}>
-              <View>
+              <View style={styles.row}>
+                <CustomIcon style={styles.infoIcon} name="tag" />
                 <Text style={[styles.infoText, styles.orangeInfo]}>N52M</Text>
               </View>
               <Text style={styles.label}>Highest Bid</Text>
             </View>
             <View style={styles.infoItem}>
-              <View>
+              <View style={styles.row}>
+                <CustomIcon style={styles.infoIcon} name="bid-sign" />
                 <Text style={styles.infoText}>25</Text>
               </View>
-              <Text style={styles.label}>Total birds</Text>
+              <Text style={styles.label}>Total bids</Text>
             </View>
             <View style={styles.infoItem}>
-              <View>
+              <View style={styles.row}>
+                <CustomIcon style={styles.infoIcon} name="timer" />
                 <Text style={styles.infoText}>2d 3h</Text>
               </View>
               <Text style={styles.label}>Time left</Text>
             </View>
             <View style={styles.infoItem}>
-              <View>
+              <View style={styles.row}>
+                <CustomIcon style={styles.infoIcon} name="eye" />
                 <Text style={styles.infoText}>{viewsCount}</Text>
               </View>
               <Text style={styles.label}>Views</Text>
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
   },
   productImage: {
     flex: 1,
-    height: 130,
+    height: 120,
     borderRadius: 7,
   },
   displayInfo: {
@@ -128,7 +133,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   name: {
-    fontSize: fontSizes.lg,
+    fontSize: fontSizes.md,
     color: colors.primary,
     fontWeight: '500',
   },
@@ -137,20 +142,30 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.md,
   },
   price: {
-    fontSize: fontSizes.title3,
+    fontSize: fontSizes.lg,
     color: colors.primary,
     fontWeight: '500',
   },
   label: {
     color: colors.blueGrey,
-    fontSize: fontSizes.md,
+    fontSize: fontSizes.sm,
   },
   infoItem: {
     flex: 1,
     alignItems: 'center',
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spaces.xs,
+  },
+  infoIcon: {
+    color: colors.grey,
+    fontSize: fontSizes.md,
+    marginRight: spaces.xs,
+  },
   infoText: {
-    fontSize: fontSizes.lg,
+    fontSize: fontSizes.md,
     color: colors.base,
     fontWeight: '500',
   },
