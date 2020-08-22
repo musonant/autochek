@@ -8,19 +8,20 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import { Rating } from 'react-native-ratings';
+import moment from 'moment';
 
 import { colors, spaces, fontSizes } from '../../styles/variables';
 import { productDetail } from './mockData';
-import { toMoneyString } from '../../libs';
+import { formatNumber } from '../../libs';
 import Bid from './Bid';
 import productImage from '../../assets/images/specimen.png';
 import CustomIcon from '../../components/CustomIcon';
 
 /**
  * @todo:
- * - Format money and thousand separator
  * - Format price to 'N52M'
- * - Add star rating
+ * - Add image placeholder
  */
 const Product = () => {
   const {
@@ -32,6 +33,15 @@ const Product = () => {
     dueDate,
     bids,
   } = productDetail;
+
+  const calculateTimeLeft = () => {
+    const time = moment(dueDate).diff(moment(), 'hours');
+    return {
+      days: Math.floor(time / 24),
+      hours: time % 24,
+    };
+  };
+  const timeLeft = calculateTimeLeft();
 
   return (
     <View style={styles.container}>
@@ -45,10 +55,20 @@ const Product = () => {
             <Image source={productImage} style={styles.productImage} />
             <View style={styles.displayInfo}>
               <Text style={styles.name}>{name}</Text>
-              <Text style={styles.star}>{stars}</Text>
-              <View />
+              <View style={styles.row}>
+                <Text style={styles.star}>{stars}</Text>
+                <Rating
+                  ratingCount={5}
+                  imageSize={15}
+                  type="custom"
+                  style={styles.rating}
+                  ratingColor={colors.orange}
+                  ratingBackgroundColor={colors.grey}
+                  readonly
+                />
+              </View>
               <View>
-                <Text style={styles.price}>{toMoneyString(highestBid)}</Text>
+                <Text style={styles.price}>{formatNumber(highestBid)}</Text>
               </View>
               <Text style={styles.label}>Buy now price</Text>
             </View>
@@ -64,21 +84,25 @@ const Product = () => {
             <View style={styles.infoItem}>
               <View style={styles.row}>
                 <CustomIcon style={styles.infoIcon} name="bid-sign" />
-                <Text style={styles.infoText}>25</Text>
+                <Text style={styles.infoText}>{bids.length}</Text>
               </View>
               <Text style={styles.label}>Total bids</Text>
             </View>
             <View style={styles.infoItem}>
               <View style={styles.row}>
                 <CustomIcon style={styles.infoIcon} name="timer" />
-                <Text style={styles.infoText}>2d 3h</Text>
+                <Text style={styles.infoText}>
+                  {timeLeft.days}d {timeLeft.hours}h
+                </Text>
               </View>
               <Text style={styles.label}>Time left</Text>
             </View>
             <View style={styles.infoItem}>
               <View style={styles.row}>
                 <CustomIcon style={styles.infoIcon} name="eye" />
-                <Text style={styles.infoText}>{viewsCount}</Text>
+                <Text style={styles.infoText}>
+                  {formatNumber(viewsCount, false)}
+                </Text>
               </View>
               <Text style={styles.label}>Views</Text>
             </View>
@@ -140,6 +164,9 @@ const styles = StyleSheet.create({
   star: {
     color: colors.orange,
     fontSize: fontSizes.md,
+  },
+  rating: {
+    marginLeft: spaces.sm,
   },
   price: {
     fontSize: fontSizes.lg,

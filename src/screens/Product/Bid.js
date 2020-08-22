@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import moment from 'moment';
 import { spaces, colors, fontSizes } from '../../styles/variables';
-import { toMoneyString } from '../../libs';
+import { formatNumber } from '../../libs';
 import bidIcon from '../../assets/images/bid.png';
 import CustomIcon from '../../components/CustomIcon';
 
@@ -20,7 +20,7 @@ const Bid = ({ id, date, price }) => {
       </View>
       <View style={styles.rightContent}>
         <CustomIcon name="tag" style={styles.icon} />
-        {price && <Text style={styles.price}>{toMoneyString(price)}</Text>}
+        {price && <Text style={styles.price}>{formatNumber(price)}</Text>}
       </View>
     </View>
   );

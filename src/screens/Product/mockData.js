@@ -4,7 +4,7 @@ export const productDetail = {
   stars: 4.2,
   highestBid: 52000000,
   viewsCount: 1355,
-  dueDate: new Date(),
+  dueDate: '2020-08-29 06:23:07',
   bids: [
     {
       id: '00001',
