@@ -50,6 +50,7 @@ const Product = () => {
               <View style={styles.row}>
                 <Text style={styles.star}>{stars}</Text>
                 <Rating
+                  startingValue={stars}
                   ratingCount={5}
                   imageSize={15}
                   type="custom"
