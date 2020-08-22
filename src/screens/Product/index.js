@@ -13,26 +13,17 @@ import moment from 'moment';
 
 import { colors, spaces, fontSizes } from '../../styles/variables';
 import { productDetail } from './mockData';
-import { formatNumber } from '../../libs';
+import { formatNumber, abbreviateNumber } from '../../libs';
 import Bid from './Bid';
 import productImage from '../../assets/images/specimen.png';
 import CustomIcon from '../../components/CustomIcon';
 
 /**
  * @todo:
- * - Format price to 'N52M'
- * - Add image placeholder
+ * - Add image placeholder for product image
  */
 const Product = () => {
-  const {
-    imageUrl,
-    name,
-    stars,
-    highestBid,
-    viewsCount,
-    dueDate,
-    bids,
-  } = productDetail;
+  const { name, stars, highestBid, viewsCount, dueDate, bids } = productDetail;
 
   const calculateTimeLeft = () => {
     const time = moment(dueDate).diff(moment(), 'hours');
@@ -42,6 +33,7 @@ const Product = () => {
     };
   };
   const timeLeft = calculateTimeLeft();
+  const priceAbbreviation = abbreviateNumber(highestBid);
 
   return (
     <View style={styles.container}>
@@ -77,7 +69,9 @@ const Product = () => {
             <View style={styles.infoItem}>
               <View style={styles.row}>
                 <CustomIcon style={styles.infoIcon} name="tag" />
-                <Text style={[styles.infoText, styles.orangeInfo]}>N52M</Text>
+                <Text style={[styles.infoText, styles.orangeInfo]}>
+                  {priceAbbreviation}
+                </Text>
               </View>
               <Text style={styles.label}>Highest Bid</Text>
             </View>
