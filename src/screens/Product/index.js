@@ -3,27 +3,30 @@ import {
   View,
   Text,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
-  Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import { Rating } from 'react-native-ratings';
 import moment from 'moment';
 
 import { colors, spaces, fontSizes } from '../../styles/variables';
 import { productDetail } from './mockData';
 import { formatNumber, abbreviateNumber } from '../../libs';
-import Bid from './Bid';
-import productImage from '../../assets/images/specimen.png';
+import Bid from '../../components/Bid';
 import CustomIcon from '../../components/CustomIcon';
+import ProductDisplay from '../../components/ProductDisplay';
+import Title from '../../components/Title';
 
-/**
- * @todo:
- * - Add image placeholder for product image
- */
-const Product = () => {
-  const { name, stars, highestBid, viewsCount, dueDate, bids } = productDetail;
+const Product = ({ navigation }) => {
+  const {
+    name,
+    stars,
+    highestBid,
+    viewsCount,
+    dueDate,
+    bids,
+    imageUrl,
+  } = productDetail;
 
   const calculateTimeLeft = () => {
     const time = moment(dueDate).diff(moment(), 'hours');
@@ -37,35 +40,15 @@ const Product = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.title}>
-        <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
-        <Text style={styles.titleText}>Bids on your car</Text>
-      </SafeAreaView>
       <ScrollView>
+        <Title title="Bids on your car" />
         <View style={styles.productDisplay}>
-          <View style={styles.display}>
-            <Image source={productImage} style={styles.productImage} />
-            <View style={styles.displayInfo}>
-              <Text style={styles.name}>{name}</Text>
-              <View style={styles.row}>
-                <Text style={styles.star}>{stars}</Text>
-                <Rating
-                  startingValue={stars}
-                  ratingCount={5}
-                  imageSize={15}
-                  type="custom"
-                  style={styles.rating}
-                  ratingColor={colors.orange}
-                  ratingBackgroundColor={colors.grey}
-                  readonly
-                />
-              </View>
-              <View>
-                <Text style={styles.price}>{formatNumber(highestBid)}</Text>
-              </View>
-              <Text style={styles.label}>Buy now price</Text>
-            </View>
-          </View>
+          <ProductDisplay
+            name={name}
+            stars={stars}
+            highestBid={highestBid}
+            imageUrl={imageUrl}
+          />
           <View style={styles.quickInfo}>
             <View style={styles.infoItem}>
               <View style={styles.row}>
@@ -105,7 +88,16 @@ const Product = () => {
         </View>
         <SafeAreaView>
           {bids.map((bid) => (
-            <Bid key={bid.id} {...bid} />
+            <TouchableOpacity
+              key={bid.id}
+              onPress={() =>
+                navigation.navigate('Auction', {
+                  bidDetail: bid,
+                  productDetail,
+                })
+              }>
+              <Bid {...bid} />
+            </TouchableOpacity>
           ))}
         </SafeAreaView>
       </ScrollView>
@@ -117,32 +109,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  title: {
-    backgroundColor: colors.primary,
-  },
-  titleText: {
-    color: colors.white,
-    paddingHorizontal: spaces.appSpacing01,
-    paddingVertical: spaces.md,
-    fontSize: fontSizes.title3,
-  },
   productDisplay: {
     backgroundColor: colors.milk,
-  },
-  display: {
-    paddingHorizontal: spaces.appSpacing01,
-    paddingVertical: spaces.lg,
-    flexDirection: 'row',
-  },
-  productImage: {
-    flex: 1,
-    height: 120,
-    borderRadius: 7,
-  },
-  displayInfo: {
-    flex: 1,
-    paddingLeft: spaces.md,
-    justifyContent: 'space-between',
   },
   quickInfo: {
     borderTopColor: colors.separator,
@@ -150,23 +118,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: spaces.appSpacing01,
     flexDirection: 'row',
-  },
-  name: {
-    fontSize: fontSizes.md,
-    color: colors.primary,
-    fontWeight: '500',
-  },
-  star: {
-    color: colors.orange,
-    fontSize: fontSizes.md,
-  },
-  rating: {
-    marginLeft: spaces.sm,
-  },
-  price: {
-    fontSize: fontSizes.lg,
-    color: colors.primary,
-    fontWeight: '500',
   },
   label: {
     color: colors.blueGrey,
@@ -196,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Product;
+export default React.memo(Product);

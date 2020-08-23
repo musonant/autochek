@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import moment from 'moment';
-import { spaces, colors, fontSizes } from '../../styles/variables';
-import { formatNumber } from '../../libs';
-import bidIcon from '../../assets/images/bid.png';
-import CustomIcon from '../../components/CustomIcon';
+import { spaces, colors, fontSizes } from '../styles/variables';
+import { formatNumber } from '../libs';
+import bidIcon from '../assets/images/bid.png';
+import CustomIcon from './CustomIcon';
 
 const Bid = ({ id, date, price }) => {
   return (
