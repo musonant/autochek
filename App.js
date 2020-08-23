@@ -1,12 +1,9 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {} from 'react-native';
-import Product from './src/screens/Product';
+import AppNavigator from './src/navigation';
 
-/**
- * @todo: Replace with navigation component
- */
 const App = () => {
-  return <Product />;
+  return <AppNavigator />;
 };
 
 export default App;
