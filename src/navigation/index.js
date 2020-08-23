@@ -18,9 +18,6 @@ const defaultScreenOptions = {
     backgroundColor: 'white',
   },
   headerTitleAlign: 'left',
-  headerBackTitleStyle: {
-    // color: 'red',
-  },
 };
 
 const AppNavigator = () => {

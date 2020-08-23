@@ -86,7 +86,11 @@ const Auction = ({ route }) => {
     return (
       <View style={styles.expectationContainer}>
         <Text style={styles.expectationLabel}>Your Expected Price</Text>
-        <TextInput money containerStyle={styles.expectationInput} />
+        <TextInput
+          keyboardType="numeric"
+          money
+          containerStyle={styles.expectationInput}
+        />
         <Button title="REQUEST" onPress={sendOffer} />
       </View>
     );
