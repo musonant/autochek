@@ -3,15 +3,38 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Product from '../screens/Product';
 import Auction from '../screens/Auction';
+import { colors } from '../styles/variables';
 
 const Stack = createStackNavigator();
+
+const defaultScreenOptions = {
+  headerStyle: {
+    backgroundColor: colors.primary,
+  },
+  headerTitleStyle: {
+    color: colors.white,
+  },
+  cardStyle: {
+    backgroundColor: 'white',
+  },
+
+  headerShown: false,
+};
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Product" component={Product} />
-        <Stack.Screen name="Auction" component={Auction} />
+      <Stack.Navigator screenOptions={defaultScreenOptions}>
+        <Stack.Screen
+          name="Product"
+          component={Product}
+          options={{ title: 'Bids on your car' }}
+        />
+        <Stack.Screen
+          name="Auction"
+          component={Auction}
+          options={{ title: 'Auction Completed' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

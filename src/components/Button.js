@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, spaces, fontSizes } from '../styles/variables';
 
-const CustomButton = ({ title, type }) => {
+const CustomButton = ({ title, type, onPress }) => {
   const typeToColor = {
     primary: colors.primary,
     error: colors.red,
@@ -11,6 +11,7 @@ const CustomButton = ({ title, type }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
+      onPress={onPress}
       style={[styles.container, { backgroundColor: typeToColor[type] }]}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
@@ -20,6 +21,7 @@ const CustomButton = ({ title, type }) => {
 CustomButton.defaultProps = {
   title: '',
   type: 'primary',
+  onPress: () => null,
 };
 
 const styles = StyleSheet.create({
@@ -30,11 +32,11 @@ const styles = StyleSheet.create({
     paddingVertical: spaces.md,
     borderRadius: 5,
     shadowColor: '#000',
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
     shadowOffset: {
       width: 1,
-      height: 1,
+      height: 2,
     },
   },
   title: {

@@ -15,7 +15,7 @@ export const colors = {
   base: '#1A1A1A',
   black: '#000000',
   blueGrey: '#607D8B',
-  cloudWhite: '#F2F2F2,',
+  cloudWhite: '#F2F2F2',
   green: '#4CAF50',
   grey: '#808080',
   hotRed: '#D62828',
