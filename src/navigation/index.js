@@ -17,8 +17,10 @@ const defaultScreenOptions = {
   cardStyle: {
     backgroundColor: 'white',
   },
-
-  headerShown: false,
+  headerTitleAlign: 'left',
+  headerBackTitleStyle: {
+    // color: 'red',
+  },
 };
 
 const AppNavigator = () => {
@@ -33,7 +35,7 @@ const AppNavigator = () => {
         <Stack.Screen
           name="Auction"
           component={Auction}
-          options={{ title: 'Auction Completed' }}
+          options={{ title: 'Auction Completed', headerTitleAlign: 'right' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

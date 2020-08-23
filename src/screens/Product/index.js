@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import moment from 'moment';
 
@@ -16,6 +16,7 @@ import Bid from '../../components/Bid';
 import CustomIcon from '../../components/CustomIcon';
 import ProductDisplay from '../../components/ProductDisplay';
 import Title from '../../components/Title';
+import BidInfoBar from '../../components/BidInfoBar';
 
 const Product = ({ navigation }) => {
   const {
@@ -38,10 +39,34 @@ const Product = ({ navigation }) => {
   const timeLeft = calculateTimeLeft();
   const priceAbbreviation = abbreviateNumber(highestBid);
 
+  const bidInfoData = [
+    {
+      label: 'Highest Bid',
+      icon: <CustomIcon style={styles.infoIcon} name="tag" />,
+      value: priceAbbreviation,
+      color: colors.orangeRed,
+    },
+    {
+      label: 'Total Bids',
+      icon: <CustomIcon style={styles.infoIcon} name="bid-sign" />,
+      value: bids.length,
+    },
+    {
+      label: 'Time left',
+      icon: <CustomIcon style={styles.infoIcon} name="bid-sign" />,
+      value: `${timeLeft.days}d ${timeLeft.hours}h`,
+    },
+    {
+      label: 'Views',
+      icon: <CustomIcon style={styles.infoIcon} name="timer" />,
+      value: formatNumber(viewsCount, false),
+    },
+  ];
+
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
       <ScrollView>
-        <Title title="Bids on your car" />
         <View style={styles.productDisplay}>
           <ProductDisplay
             name={name}
@@ -49,42 +74,7 @@ const Product = ({ navigation }) => {
             highestBid={highestBid}
             imageUrl={imageUrl}
           />
-          <View style={styles.quickInfo}>
-            <View style={styles.infoItem}>
-              <View style={styles.row}>
-                <CustomIcon style={styles.infoIcon} name="tag" />
-                <Text style={[styles.infoText, styles.orangeInfo]}>
-                  {priceAbbreviation}
-                </Text>
-              </View>
-              <Text style={styles.label}>Highest Bid</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <View style={styles.row}>
-                <CustomIcon style={styles.infoIcon} name="bid-sign" />
-                <Text style={styles.infoText}>{bids.length}</Text>
-              </View>
-              <Text style={styles.label}>Total bids</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <View style={styles.row}>
-                <CustomIcon style={styles.infoIcon} name="timer" />
-                <Text style={styles.infoText}>
-                  {timeLeft.days}d {timeLeft.hours}h
-                </Text>
-              </View>
-              <Text style={styles.label}>Time left</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <View style={styles.row}>
-                <CustomIcon style={styles.infoIcon} name="eye" />
-                <Text style={styles.infoText}>
-                  {formatNumber(viewsCount, false)}
-                </Text>
-              </View>
-              <Text style={styles.label}>Views</Text>
-            </View>
-          </View>
+          <BidInfoBar data={bidInfoData} />
         </View>
         <SafeAreaView>
           {bids.map((bid) => (
@@ -112,20 +102,9 @@ const styles = StyleSheet.create({
   productDisplay: {
     backgroundColor: colors.milk,
   },
-  quickInfo: {
-    borderTopColor: colors.separator,
-    borderTopWidth: 1,
-    borderStyle: 'solid',
-    padding: spaces.appSpacing01,
-    flexDirection: 'row',
-  },
   label: {
     color: colors.blueGrey,
     fontSize: fontSizes.sm,
-  },
-  infoItem: {
-    flex: 1,
-    alignItems: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -136,14 +115,6 @@ const styles = StyleSheet.create({
     color: colors.grey,
     fontSize: fontSizes.md,
     marginRight: spaces.xs,
-  },
-  infoText: {
-    fontSize: fontSizes.md,
-    color: colors.base,
-    fontWeight: '500',
-  },
-  orangeInfo: {
-    color: colors.orangeRed,
   },
 });
 
