@@ -26,7 +26,7 @@ import BidInfoBar from '../../components/BidInfoBar';
  * - use gif image for acceptance image
  * - format money input to include thousand separator
  */
-const Auction = ({ route }) => {
+const Auction = ({ route, navigation }) => {
   const bidDetail = route.params?.bidDetail ?? {};
   const { name, stars, imageUrl } = route.params?.productDetail ?? {};
   const [status, setStatus] = useState('winning');
@@ -63,6 +63,7 @@ const Auction = ({ route }) => {
 
   const sendOffer = () => {
     setStatus('offer-sent');
+    navigation.setOptions({ title: 'Offer sent' });
   };
 
   const renderAcceptanceInfo = () => {
