@@ -15,9 +15,10 @@ const defaultScreenOptions = {
     color: colors.white,
   },
   cardStyle: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   headerTitleAlign: 'left',
+  headerTintColor: colors.white,
 };
 
 const AppNavigator = () => {
