@@ -5,7 +5,7 @@ import { colors, spaces, fontSizes } from '../styles/variables';
 const BidInfoBar = ({ data }) => {
   return (
     <View style={styles.quickInfo}>
-      {data.map(({ label, icon, value, color }, index) => (
+      {data.map(({ label, icon, value, color = colors.black }, index) => (
         <View style={styles.infoItem} key={`item-${index}`}>
           <View style={styles.row}>
             {icon}

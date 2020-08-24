@@ -15,7 +15,6 @@ import { formatNumber, abbreviateNumber } from '../../libs';
 import Bid from '../../components/Bid';
 import CustomIcon from '../../components/CustomIcon';
 import ProductDisplay from '../../components/ProductDisplay';
-import Title from '../../components/Title';
 import BidInfoBar from '../../components/BidInfoBar';
 
 const Product = ({ navigation }) => {
@@ -53,12 +52,12 @@ const Product = ({ navigation }) => {
     },
     {
       label: 'Time left',
-      icon: <CustomIcon style={styles.infoIcon} name="bid-sign" />,
+      icon: <CustomIcon style={styles.infoIcon} name="timer" />,
       value: `${timeLeft.days}d ${timeLeft.hours}h`,
     },
     {
       label: 'Views',
-      icon: <CustomIcon style={styles.infoIcon} name="timer" />,
+      icon: <CustomIcon style={styles.infoIcon} name="eye" />,
       value: formatNumber(viewsCount, false),
     },
   ];
