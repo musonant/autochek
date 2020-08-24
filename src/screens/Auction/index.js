@@ -73,10 +73,9 @@ const Auction = ({ route, navigation }) => {
         <View style={styles.fill}>
           <Text style={styles.acceptanceTitle}>Bid Accepted!</Text>
           <Text style={styles.acceptanceText}>
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff StuffStuff Stuff
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff
-            Stuff
+            It usually takes a while, but not necessarily. Technology is subject
+            to the speed of human evolution, inovation and invention. Enjoy it,
+            all the same.
           </Text>
         </View>
       </View>
@@ -159,17 +158,17 @@ const Auction = ({ route, navigation }) => {
         <View style={styles.offerInfo}>
           <Text style={styles.acceptanceTitle}>Offer sent!</Text>
           <Text style={styles.acceptanceText}>
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff StuffStuff Stuff
-            Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff
-            Stuff
+            It usually takes a while, but not necessarily. Technology is subject
+            to the speed of human evolution, inovation and invention. Enjoy it,
+            all the same. The near future as bright as a borrowed sun in the
+            solar system.
           </Text>
         </View>
         <View style={styles.offerInfo}>
           <Text style={styles.label}>Remaining Time</Text>
           <View>
             <CountDown
-              until={60 * 10 + 30}
+              until={60 * 60 * 60 + 30}
               size={30}
               timeLabelStyle={styles.timeLabelStyle}
               digitStyle={styles.digitStyle}
